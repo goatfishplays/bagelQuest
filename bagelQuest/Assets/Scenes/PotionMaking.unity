@@ -398,6 +398,7 @@ GameObject:
   - component: {fileID: 314166068}
   - component: {fileID: 314166067}
   - component: {fileID: 314166071}
+  - component: {fileID: 314166072}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -514,6 +515,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brewFill: {fileID: 558438510}
+--- !u!114 &314166072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314166066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b54a1ddec9709d48a2486b0b2d7f199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &323304649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1205,7 +1218,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 499600208}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 314166072}
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_MethodName: OpenMenu
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Notebook
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &499600208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1891,7 +1916,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1049045223}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 314166072}
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_MethodName: OpenMenu
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: RecipeBook
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1049045223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3419,7 +3456,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1847743828}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 314166072}
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_MethodName: CloseScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: PotionMaking
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1847743828
 MonoBehaviour:
   m_ObjectHideFlags: 0

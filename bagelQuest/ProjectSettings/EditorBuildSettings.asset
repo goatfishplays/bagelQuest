@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/PotionMaking.unity
+    guid: 763401cd10f91bd4c95f249c468b6d6d
   m_configObjects: {}

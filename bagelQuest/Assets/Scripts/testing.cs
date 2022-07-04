@@ -7,7 +7,7 @@ public class testing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SceneChanger.OpenMenu("PotionMaking");
     }
 
     // Update is called once per frame

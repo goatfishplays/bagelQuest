@@ -8,6 +8,7 @@ public class BaseInfo : MonoBehaviour
     [SerializeField] private int weight;
     [SerializeField] private Color color;
     [SerializeField] private int colorStrength;
+    [SerializeField] private int index;
 
     public int MaxStability()
     {
@@ -27,5 +28,10 @@ public class BaseInfo : MonoBehaviour
     public int ColorStrength()
     {
         return colorStrength;
+    }
+
+    public int Index()
+    {
+        return index;
     }
 }

@@ -6,6 +6,7 @@ public class IngredInfo : MonoBehaviour
 {
     // 0: ingred, 1: agent
     [SerializeField] private int type;
+    [SerializeField] private int index;
     [SerializeField] private int stability;
     [SerializeField] private int weight;
     [SerializeField] private Color color;
@@ -34,6 +35,11 @@ public class IngredInfo : MonoBehaviour
     public int ColorStrength()
     {
         return colorStrength;
+    }
+
+    public int Index()
+    {
+        return index;
     }
 
 }

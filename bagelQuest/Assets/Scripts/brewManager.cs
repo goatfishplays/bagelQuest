@@ -14,15 +14,26 @@ public class brewManager : MonoBehaviour
     private int stability = 0;
     private int weight = 0;
     private int totalColorStrength = 0;
+    private int curFlask = 0;
     
-    private void Start()
+    public void SaveAtk()
     {
-        
+        Player.flaskColor = brewFill.color;
+        Player.flaskType = curFlask;
+        FlaskManager.ingredCount = ingredCount;
+        List<int> ingredIndList = new List<int>();
+        foreach(IngredInfo i in ingredList)
+        {
+            ingredIndList.Add(i.Index());
+        }
+        FlaskManager.ingredList = ingredIndList;
     }
 
     public void SetFlaskType(int i)
     {
-        Player.flaskType = i;
+        transform.Find("flaskParent").GetChild(curFlask).GetComponent<Image>().color = Color.white;
+        transform.Find("flaskParent").GetChild(i).GetComponent<Image>().color = new Color32(200, 200, 200, 255);
+        curFlask = i;
     }
 
     public void SetBase(BaseInfo bI)
@@ -85,7 +96,6 @@ public class brewManager : MonoBehaviour
             colorAcc += ingredCount[i] * ingredList[i].ColorStrength() * ingredList[i].Color();
         }
         colorAcc /= totalColorStrength;
-        print(colorAcc);
         brewFill.color = colorAcc;
     }
 }

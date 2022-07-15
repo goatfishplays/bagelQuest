@@ -5,8 +5,7 @@ using UnityEngine;
 public class FlaskManager : MonoBehaviour
 {
     public static float shatterDmg = 5f;
-    public static List<int> ingredCount = new List<int>();
-    public static List<int> ingredList = new List<int>();
+    public static float[] atkComp = {};
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,6 +14,7 @@ public class FlaskManager : MonoBehaviour
 
     private void Shatter(GameObject temp)
     {
+        print(HFuncs.StrArray(atkComp));
         if(!temp.CompareTag("Player"))
         {
             if(temp.GetComponent<Entity>() != null)
@@ -27,5 +27,10 @@ public class FlaskManager : MonoBehaviour
             }
             Destroy(this.gameObject);
         }
+    }
+
+    private void FlaskEff()
+    {
+        
     }
 }

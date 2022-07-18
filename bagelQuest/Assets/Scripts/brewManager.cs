@@ -16,6 +16,46 @@ public class brewManager : MonoBehaviour
     private int totalColorStrength = 0;
     private int curFlask = 0;
     
+
+    public void OpenRecipe()
+    {
+        transform.Find("RecipeBookParent").gameObject.SetActive(true);
+    }
+
+    public bool HasStuff()
+    {
+        return baseThing != null;
+    }
+
+    public Page ToPage(string name, string desc)
+    {
+        return new Page(baseThing, ingredCount, ingredList, stability, (int)sSlid.maxValue, weight, (int)wSlid.maxValue, brewFill.color, name, desc);
+    }
+
+    public void LoadPage(Page pg)
+    {
+        totalColorStrength = baseThing.ColorStrength();
+        this.ingredList = new List<IngredInfo>();
+        this.ingredCount = new List<float>();
+        for(int i = 0; i < pg.ingredArray.Length; i++)
+        {
+            if(pg.ingredCount[i] == 0)
+            {
+                break;
+            }
+            this.ingredList.Add(pg.ingredArray[i]);
+            this.ingredCount.Add(pg.ingredCount[i]);
+            totalColorStrength += ingredList[i].ColorStrength() * (int)ingredCount[i];
+        }
+        this.baseThing = pg.baseThing;
+        this.stability = pg.stability;
+        sSlid.maxValue = pg.maxStability;
+        this.weight = pg.weight;
+        wSlid.maxValue = pg.maxWeight;
+        UpdateColor();
+        UpdateBars();
+    }
+
     public void SaveAtk()
     {
         Player.flaskColor = brewFill.color;

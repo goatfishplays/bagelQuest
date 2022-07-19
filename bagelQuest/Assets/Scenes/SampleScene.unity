@@ -3163,12 +3163,8 @@ MonoBehaviour:
   lastTimeGroundedCap: 10
   lastTimeGrounded: 0
   throwForce: 999
-  flaskType: 2
   flask: {fileID: 3328757576698364169, guid: 7b057e6a3f317964f829c5a999e49a9f, type: 3}
   flask2: {fileID: 8895272951521014964, guid: 8261c220cd0264c468a9306a14d09516, type: 3}
-  flaskColor:
-    serializedVersion: 2
-    rgba: 4278190335
 --- !u!114 &1487667691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3245,11 +3241,11 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.25, y: 0.06}
+  m_Offset: {x: 0, y: 0.06}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.47, y: 1.04}
+    oldSize: {x: 1.8, y: 1.04}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -3298,7 +3294,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fa207cc15ab69404eb3baa64488c6508, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f559b4f57b39bd74ebc83185fd09571b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

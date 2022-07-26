@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private PlayerInput pI;
     private BoxCollider2D bC;
     private Animator ani;
@@ -28,7 +28,8 @@ public class Player : MonoBehaviour
     private bool isDashing = false;
     private bool isJumping = false;
     private int dashTime = 0;
-    private int lastTickDir;
+    private int lastTickDir = 1;
+    private int movingDir = 1;
     private Vector2 mPos;
     private Vector2 inputsV = new Vector2(0,0);
     [SerializeField] private GameObject flask;
@@ -48,6 +49,7 @@ public class Player : MonoBehaviour
         bC = GetComponent<BoxCollider2D>();
         ani = GetComponent<Animator>();
         
+        Enemy.playerRb = rb;
 
         //class created from the InputSystem, allows for use in code
         inputs = new Inputs();
@@ -80,18 +82,18 @@ public class Player : MonoBehaviour
         if (moveDir == 1)
         {
             transform.rotation = new Quaternion(0, 0, 0, 0);
-            if (lastTickDir == -1)
+            /*if (lastTickDir == -1)
             {
                 pos.x -= transform.localScale.x * bC.offset.x;
-            }
+            }*/
         }
         else
         {
             transform.rotation = new Quaternion(0, 180, 0, 0);
-            if (lastTickDir == 1)
+            /*if (lastTickDir == 1)
             {
                 pos.x += transform.localScale.x * bC.offset.x;
-            }
+            }*/
         }
 
         //dash
@@ -122,13 +124,19 @@ public class Player : MonoBehaviour
         if(dashTime > dashTicks)
         {
             dashTime = 0;
+            velo.x = 0;
             if((int)inputsV.x != 0)
             {
                 moveTime = accelTicks;
+                velo.x = topSpeed * moveDir;
             }
             dashCDTime = dashCD;
         }
-        dashCDTime--;
+        if(dashCDTime > -1)
+        {
+            dashCDTime--;
+        }
+        
 
         //Jump
         groundCheck = Physics2D.OverlapBox(new Vector2(pos.x + (transform.localScale.x*bC.offset.x*moveDir), pos.y + bC.offset.y*transform.localScale.y - 0.05f), new Vector2(bC.size.x - 0.025f, bC.size.y - 0.1f), 0, LayerMask.GetMask("Ground"));
@@ -137,6 +145,7 @@ public class Player : MonoBehaviour
             lastTimeGrounded++;
             if((int)inputsV.y == 0 && velo.y > 0)
             {
+                // if ever need replace this probs just get a counter for time force was applied/somehow use last time grounded and multiply by -addforce jump
                 velo.y = 0;
             }
         }
@@ -152,35 +161,63 @@ public class Player : MonoBehaviour
         {
             isJumping = true;
             lastTimeGrounded = lastTimeGroundedCap;
-            velo.y += jump;
+            /*velo.y += jump;*/
+            rb.AddForce(Vector2.up * jump);
         }
 
         if (!isDashing)
         {
             //horiz move
-            velo.x = inputsV.x * topSpeed * moveTime/(float)accelTicks;
-            if((int)inputsV.x == 0)
+       /*     velo.x = inputsV.x * topSpeed * moveTime/(float)accelTicks;*/
+            
+            if(Physics2D.OverlapBox(new Vector2(pos.x + (transform.localScale.x * bC.offset.x * moveDir), pos.y + bC.offset.y * transform.localScale.y), new Vector2(bC.size.x, bC.size.y - 0.025f), 0, LayerMask.GetMask("Ground")))
             {
+                moveTime = 0; 
+            }
+
+
+            if ((int)inputsV.x == 0 || moveDir != lastTickDir)
+            {
+                if(moveTime != 0)
+                {
+                    rb.AddForce(new Vector2(-movingDir * topSpeed * rb.mass * moveTime / (accelTicks / 60.0f), 0));
+                    print("a: " + lastTickDir);
+                    print("a: " + (-movingDir * topSpeed * rb.mass * moveTime / (accelTicks / 60.0f)));
+                }
                 moveTime = 0;
             }
             else if(moveTime < accelTicks)
             {
                 if((int)inputsV.x == lastTickDir)
                 { 
+                    
                     moveTime++;
+                    print("b: " + lastTickDir);
+                    rb.AddForce(new Vector2(inputsV.x * topSpeed * rb.mass / (accelTicks / 60.0f), 0));
+                    print("b: " + (moveDir * topSpeed * rb.mass / (accelTicks / 60.0f)));
+                    movingDir = moveDir;
+
                 }
-                else
+                /*else
                 {
+                    if (moveTime != 0)
+                    {
+                        print("c: " + lastTickDir);
+                        rb.AddForce(new Vector2(-movingDir * topSpeed * rb.mass * moveTime / (accelTicks / 60.0f), 0));
+                        print("c: " + (-movingDir * topSpeed * rb.mass * moveTime / (accelTicks / 60.0f)));
+                    }
                     moveTime = 0;
-                }
+                }*/
+                
             }
+            
         }
+        rb.velocity = velo;
 
         //Animation
         ani.SetBool("isDashing", isDashing);
 
         transform.position = pos;
-        rb.velocity = velo;
 
     }
 

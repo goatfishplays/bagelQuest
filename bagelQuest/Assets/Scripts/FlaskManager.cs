@@ -15,11 +15,11 @@ public class FlaskManager : MonoBehaviour
     private void Shatter(GameObject temp)
     {
         print(HFuncs.StrArray(atkComp));
-        if(!temp.CompareTag("Player"))
+        if(!temp.CompareTag("Player") && !temp.CompareTag("FlaskFilter"))
         {
             if(temp.GetComponent<Entity>() != null)
             {
-                temp.gameObject.GetComponent<Entity>().hurt(shatterDmg);
+                temp.gameObject.GetComponent<Entity>().Hurt(shatterDmg);
             }
             else
             {
